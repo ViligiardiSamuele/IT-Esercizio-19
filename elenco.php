@@ -1,7 +1,7 @@
 <?php
 $mysqli = new mysqli("localhost", "root", null, "es19", 3306)
     or die("Connessione non riuscita" . $mysqli->connect_error . " " . $mysqli->connect_errno);
-$response = mysqli_query($mysqli, "select * from Genere")
+$response = mysqli_query($mysqli, "select titolo, regista, anno, tipo from Video where IDgenere = " . $_GET['genere'])
     or die("Connessione non riuscita" . $mysqli->connect_error . " " . $mysqli->connect_errno);
 $mysqli->close() or die("Connessione non riuscita" . $mysqli->error . " " . $mysqli->errno);
 ?>
@@ -16,17 +16,33 @@ $mysqli->close() or die("Connessione non riuscita" . $mysqli->error . " " . $mys
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body data-bs-theme="dark"> 
+<body data-bs-theme="dark">
     <div class="card mx-auto mt-5" style="max-width: 20rem;">
         <div class="card-body">
-            <h5 class="card-title text-center">Opzioni</h5>
-            <p class="text-center"><a href="nuovoVideo.php">Inserisci un video</a></p>
             <ul class="list-group list-group-flush">
-                <?php
-                while ($row = mysqli_fetch_array($response, MYSQLI_ASSOC)) {
-                    echo '<li class="list-group-item"><a href="elenco.php?genere='. $row['ID'] . '">'. $row['Descrizione'] . '</a></li>';
-                }
-                ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titolo</th>
+                            <th scope="col">Regista</th>
+                            <th scope="col">Anno</th>
+                            <th scope="col">Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_array($response, MYSQLI_ASSOC)) {
+                            echo '
+                            <tr>
+                                <th scope="row">'.$row['titolo'].'</th>
+                                <td>'.$row['regista'].'</td>
+                                <td>'.$row['anno'].'</td>
+                                <td>'.$row['tipo'].'</td>
+                            </tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </ul>
         </div>
     </div>
