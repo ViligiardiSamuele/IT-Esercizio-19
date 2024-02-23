@@ -19,31 +19,30 @@ $mysqli->close() or die("Connessione non riuscita" . $mysqli->error . " " . $mys
 <body data-bs-theme="dark">
     <div class="card mx-auto mt-5" style="max-width: 20rem;">
         <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Titolo</th>
-                            <th scope="col">Regista</th>
-                            <th scope="col">Anno</th>
-                            <th scope="col">Tipo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        while ($row = mysqli_fetch_array($response, MYSQLI_ASSOC)) {
-                            echo '
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titolo</th>
+                        <th scope="col">Regista</th>
+                        <th scope="col">Anno</th>
+                        <th scope="col">Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    while ($row = mysqli_fetch_array($response, MYSQLI_ASSOC)) {
+                        echo '
                             <tr>
-                                <th scope="row">'.$row['titolo'].'</th>
-                                <td>'.$row['regista'].'</td>
-                                <td>'.$row['anno'].'</td>
-                                <td>'.$row['tipo'].'</td>
+                                <th scope="row">' . $row['titolo'] . '</th>
+                                <td>' . $row['regista'] . '</td>
+                                <td>' . $row['anno'] . '</td>
+                                <td>' . $row['tipo'] . '</td>
                             </tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </ul>
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <a href="index.php">Home</a>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
